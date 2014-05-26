@@ -2,6 +2,7 @@ module ElasticsearchMysqlImporter
   class Configuration
     attr_accessor :mysql_host, :mysql_port, :mysql_socket, :mysql_username, :mysql_password, :mysql_encoding
     attr_accessor :mysql_database, :mysql_options, :prepared_query, :query, :primary_key, :output_file
+    attr_accessor :elasticsearch_index, :elasticsearch_type
 
     def initialize
       super

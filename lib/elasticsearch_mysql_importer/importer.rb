@@ -25,7 +25,10 @@ module ElasticsearchMysqlImporter
     private
     def validate_configuration
       if @configuration.mysql_database.nil? or @configuration.query.nil?
-        raise "Missing Configuration: 'mysql_database' or 'query' are required."
+        raise "Missing Configuration: 'mysql_database' and 'query' are required."
+      end
+      if @configuration.elasticsearch_index.nil? or @configuration.elasticsearch_type.nil?
+        raise "Missing Configuration: 'elasticsearch_index' and 'elasticsearch_type' are required."
       end
     end
 
