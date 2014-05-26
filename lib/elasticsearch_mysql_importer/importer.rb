@@ -38,7 +38,7 @@ module ElasticsearchMysqlImporter
           :username => @configuration.mysql_username,
           :password => @configuration.mysql_password,
           :database => @configuration.mysql_database,
-          :encoding => 'utf8',
+          :encoding => @configuration.mysql_encoding,
           :reconnect => true
         })
       else
@@ -48,7 +48,7 @@ module ElasticsearchMysqlImporter
           :username => @configuration.mysql_username,
           :password => @configuration.mysql_password,
           :database => @configuration.mysql_database,
-          :encoding => 'utf8',
+          :encoding => @configuration.mysql_encoding,
           :reconnect => true
         })
       end
