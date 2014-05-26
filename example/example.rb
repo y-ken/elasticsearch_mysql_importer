@@ -43,4 +43,7 @@ importer.configure do |config|
 end
 
 importer.write_file
-p importer.output_file
+puts "Done."
+puts "The output file is written at '#{importer.output_file}'"
+puts "Let's try importing file with following curl command."
+puts "e.g.) curl -s -XPOST localhost:9200/_bulk --data-binary @#{importer.output_file}"
