@@ -21,22 +21,25 @@ importer.configure do |config|
       LEFT JOIN member_skill_relation ON members.id = member_id
       LEFT JOIN skills ON skills.id = skill_id;
   '
-  # required
+  # required for importing into elasticsearch
   config.query = '
     SELECT
       members.id AS member_id,
       members.name AS member_name,
-      "SELECT skill_name, skill_url FROM tmp_member_skill WHERE member_id = ${member_id}" AS skills,
-      current_timestamp
+      "SELECT skill_name, skill_url FROM tmp_member_skill WHERE member_id = ${member_id}" AS skills
     FROM
       members
     ;
   '
-  # required for using unique index for elasticsearch
+  # required for using unique index into elasticsearch
   config.primary_key = 'member_id'
 
-  # required for outputs file path
-  config.output_file = 'requests.json'
+  # required for specifying elasticsearch index and type
+  config.elasticsearch_index = 'importer_example'
+  config.elasticsearch_type = 'member_skill'
+
+  # required for writing output file path
+  config.output_file = 'example/requests.json'
 end
 
 importer.write_file

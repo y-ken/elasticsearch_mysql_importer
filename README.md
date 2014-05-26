@@ -1,6 +1,6 @@
 # elasticsearch_mysql_importer
 
-It is importing from mysql table with SQL to elasticsearch not only that, it could generating nested documents.
+It is importing from mysql table with SQL to elasticsearch. Not only that, it could generating nested documents.
 
 ## Usage
 
@@ -13,17 +13,19 @@ It is importing from mysql table with SQL to elasticsearch not only that, it cou
     $ vim example.rb
     
     # Execute script, then it outputs result into ./requests.json
-    $ bundle exec ruby example.rb 
+    $ bundle exec ruby example/example.rb 
     
     # Index document for elasticsearch
-    $ curl -s -XPOST localhost:9200/_bulk --data-binary @requests.json
+    $ curl -s -XPOST localhost:9200/_bulk --data-binary @example/requests.json
 
 ## TODO
 
 Pull requests are very welcome!!
 
+* add test
 * support thread
 * call elasticsearch bluk api directory
+* support CLI command
 
 ## Contributing
 
