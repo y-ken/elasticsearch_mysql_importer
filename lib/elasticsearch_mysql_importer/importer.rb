@@ -22,6 +22,10 @@ module ElasticsearchMysqlImporter
       create_import_file
     end
 
+    def write_elasticsearch
+      call_elasticsearch_bulk_api
+    end
+
     private
     def validate_configuration
       if @configuration.mysql_database.nil? or @configuration.query.nil?
@@ -88,7 +92,21 @@ module ElasticsearchMysqlImporter
         file.puts(Yajl::Encoder.encode(header))
         file.puts(Yajl::Encoder.encode(row))
       end
+      file.seek 0
       return file.path
+    end
+
+    def call_elasticsearch_bulk_api
+      begin
+        elasticsearch_bulk_uri = "http://#{@configuration.elasticsearch_host}:#{@configuration.elasticsearch_port}/_bulk"
+        uri = URI.parse(elasticsearch_bulk_uri)
+        data = File.open(@output_file, 'r').read
+        raise "Error: generated import file is empty." if data.empty?
+        http = Net::HTTP.new(uri.host, uri.port)
+        response, body = http.post(uri.path, data, {'Content-type'=>'application/json'})
+      rescue Timeout::Error, StandardError => e
+        puts "Failed to call Bulk API: #{e.message}"
+      end
     end
   end
 end

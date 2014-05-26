@@ -24,7 +24,6 @@ Pull requests are very welcome!!
 
 * add test
 * support thread
-* call elasticsearch bluk api directory
 * support CLI command
 
 ## Contributing

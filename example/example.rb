@@ -34,6 +34,11 @@ importer.configure do |config|
   # required for using unique index into elasticsearch
   config.primary_key = 'member_id'
 
+  # To post index directory into elasticsearch,
+  # configure following two lines and call 'write_elasticsearch' method.
+  # config.elasticsearch_host = 'localhost' # default: localhost
+  # config.elasticsearch_port = 9200 # default: 9200
+
   # required for specifying elasticsearch index and type
   config.elasticsearch_index = 'importer_example'
   config.elasticsearch_type = 'member_skill'
@@ -42,8 +47,17 @@ importer.configure do |config|
   config.output_file = 'example/requests.json'
 end
 
-importer.write_file
-puts "Done."
-puts "The output file is written at '#{importer.output_file}'"
-puts "Let's try importing file with following curl command."
-puts "e.g.) curl -s -XPOST localhost:9200/_bulk --data-binary @#{importer.output_file}"
+if importer.write_file
+  puts "Finished to run importer.write_file."
+  puts "The output file is written at '#{importer.output_file}'"
+  puts "Let's try importing file with following curl command."
+  puts "e.g.) curl -s -XPOST localhost:9200/_bulk --data-binary @#{importer.output_file}\n\n"
+end
+
+# To post index directory into elasticsearch, 
+# uncommented out following line instead of calling 'write_file' method.
+#if importer.write_elasticsearch 
+#  puts "Finished to run importer.write_elasticsearch."
+#  puts "Let's checking results of index with following curl command."
+#  puts "e.g.) curl localhost:9200/importer_example/_search?pretty=1"
+#end
