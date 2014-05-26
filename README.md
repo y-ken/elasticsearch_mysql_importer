@@ -15,7 +15,7 @@ It is importing from mysql table with SQL to elasticsearch. Not only that, it co
     # Execute script, then it outputs result into ./requests.json
     $ bundle exec ruby example/example.rb 
     
-    # Index document for elasticsearch
+    # Index document for elasticsearch if you didn't call 'write_elasticsearch' in example.rb
     $ curl -s -XPOST localhost:9200/_bulk --data-binary @example/requests.json
 
 ## TODO
