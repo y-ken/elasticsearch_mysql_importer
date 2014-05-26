@@ -54,9 +54,9 @@ if importer.write_file
   puts "e.g.) curl -s -XPOST localhost:9200/_bulk --data-binary @#{importer.output_file}\n\n"
 end
 
+# To post index directory into elasticsearch, uncommented out following line.
 #if importer.write_elasticsearch 
 #  puts "Finished to run importer.write_elasticsearch."
 #  puts "Let's checking results of index with following curl command."
 #  puts "e.g.) curl localhost:9200/importer_example/_search?pretty=1"
 #end
-# To post index directory into elasticsearch, uncommented out following line.
