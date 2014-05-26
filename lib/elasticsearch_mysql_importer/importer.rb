@@ -72,28 +72,32 @@ module ElasticsearchMysqlImporter
     end
 
     def create_import_file
-      file = get_file_io_object
-      db = connect_db
-      db.query(@configuration.prepared_query, @configuration.mysql_options)
-      db.query(@configuration.query, @configuration.mysql_options).each do |row|
-        row.select {|k, v| v.to_s.strip.match(/^SELECT/i) }.each do |k, v|
-          row[k] = [] unless row[k].is_a?(Array)
-          db.query(v.gsub(/\$\{([^\}]+)\}/) {|matched| row[$1].to_s}).each do |nest_row|
-            row[k] << nest_row
+      begin
+        file = get_file_io_object
+        db = connect_db
+        db.query(@configuration.prepared_query, @configuration.mysql_options)
+        db.query(@configuration.query, @configuration.mysql_options).each do |row|
+          row.select {|k, v| v.to_s.strip.match(/^SELECT/i) }.each do |k, v|
+            row[k] = [] unless row[k].is_a?(Array)
+            db.query(v.gsub(/\$\{([^\}]+)\}/) {|matched| row[$1].to_s}).each do |nest_row|
+              row[k] << nest_row
+            end
           end
-        end
-        header = { 
-          "index" => {
-            "_index" => @configuration.elasticsearch_index,
-            "_type" => @configuration.elasticsearch_type,
-            "_id" => row[@configuration.primary_key]
+          header = { 
+            "index" => {
+              "_index" => @configuration.elasticsearch_index,
+              "_type" => @configuration.elasticsearch_type,
+              "_id" => row[@configuration.primary_key]
+            }
           }
-        }
-        file.puts(Yajl::Encoder.encode(header))
-        file.puts(Yajl::Encoder.encode(row))
+          file.puts(Yajl::Encoder.encode(header))
+          file.puts(Yajl::Encoder.encode(row))
+        end
+        file.seek 0
+        return file.path
+      rescue StandardError => e
+        puts "Failed to generate import file: #{e.message}"
       end
-      file.seek 0
-      return file.path
     end
 
     def call_elasticsearch_bulk_api
