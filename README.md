@@ -1,4 +1,4 @@
-# elasticsearch_mysql_importer
+# elasticsearch_mysql_importer [![Build Status](https://travis-ci.org/y-ken/elasticsearch_mysql_importer.png?branch=master)](https://travis-ci.org/y-ken/elasticsearch_mysql_importer)
 
 It is importing from mysql table with SQL to elasticsearch. Not only that, it could generating nested documents.
 

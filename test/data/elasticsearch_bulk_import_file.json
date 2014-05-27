@@ -1,0 +1,6 @@
+{"index":{"_index":"importer_example","_type":"member_skill","_id":"1"}}
+{"member_id":"1","member_name":"User-A","skills":[{"skill_name":"PHP","skill_url":"http://php.net/"},{"skill_name":"Ruby","skill_url":"https://www.ruby-lang.org/"}]}
+{"index":{"_index":"importer_example","_type":"member_skill","_id":"2"}}
+{"member_id":"2","member_name":"User-B","skills":[{"skill_name":"Python","skill_url":"https://www.python.org/"}]}
+{"index":{"_index":"importer_example","_type":"member_skill","_id":"3"}}
+{"member_id":"3","member_name":"User-C","skills":[{"skill_name":"Python","skill_url":"https://www.python.org/"},{"skill_name":"Java","skill_url":"https://www.java.com/"},{"skill_name":"Perl","skill_url":"http://www.perl.org/"}]}

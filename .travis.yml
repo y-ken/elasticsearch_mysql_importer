@@ -1,0 +1,14 @@
+language: ruby
+
+rvm:
+  - 2.1.2
+  - 2.0.0
+  - 1.9.3
+
+services:
+  - elasticsearch
+
+before_script:
+  - mysql -e 'create database elasticsearch_mysql_importer;'
+  - mysql elasticsearch_mysql_importer < test/data/mysql_demo_tables.sql
+
