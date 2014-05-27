@@ -2,6 +2,20 @@
 
 It is importing from mysql table with SQL to elasticsearch. Not only that, it could generating nested documents.
 
+## Install
+
+Add this line to your application's Gemfile:
+
+    gem 'elasticsearch_mysql_importer'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install elasticsearch_mysql_importer
+
 ## Usage
 
     # Clone repository
@@ -22,7 +36,6 @@ It is importing from mysql table with SQL to elasticsearch. Not only that, it co
 
 Pull requests are very welcome!!
 
-* add test
 * support thread
 * support CLI command
 
